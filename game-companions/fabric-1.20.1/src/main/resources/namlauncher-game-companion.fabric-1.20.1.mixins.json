@@ -1,0 +1,17 @@
+{
+  "_author": "nattapat2871 (https://nattapat2871.me)",
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.namlauncher.bridge.fabric1201.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "BadgeResourceManagerMixin",
+    "MinecraftWindowTitleMixin",
+    "DebugScreenOverlayMixin",
+    "PlayerTabOverlayMixin",
+    "PlayerRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

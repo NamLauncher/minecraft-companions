@@ -1,0 +1,35 @@
+// Author/creator: nattapat2871 (https://nattapat2871.me)
+plugins { id 'java'; id 'net.minecraftforge.gradle' version '7.0.35' }
+version = '1.2.4-beta3+26.2'
+group = 'com.namlauncher'
+base { archivesName = 'namlauncher-game-companion-forge-26.2' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+minecraft { mappings channel: 'official', version: '26.2' }
+repositories { minecraft.mavenizer(it); maven fg.forgeMaven; maven fg.minecraftLibsMaven; mavenCentral() }
+dependencies { implementation minecraft.dependency('net.minecraftforge:forge:26.2-65.1.2') }
+
+tasks.named('compileJava') {
+    source fileTree('../../game-bridge/src/main/java')
+    source fileTree('../../game-bridge/src/client/java') {
+        exclude '**/badge/PlayerBadgeLookupService.java'
+        exclude '**/NamLauncherBrandingClient.java'
+        exclude '**/RuntimeVersionGate.java'
+    }
+    source fileTree('../neoforge-26.2/src/main/java') {
+        include '**/badge/PlayerBadgeLookupService.java'
+    }
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') { expand(version: project.version) }
+    from('../../assets/NamLauncher-icon.png') { into 'assets/namlauncher/textures/font'; rename { 'badge.png' } }
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 25 }
+tasks.withType(AbstractArchiveTask).configureEach { preserveFileTimestamps = false; reproducibleFileOrder = true }
+tasks.named('jar', Jar) { manifest.attributes('MixinConfigs': 'namlauncher-game-companion.forge-26.2.mixins.json') }
+
+// Private icon entry is not addressable through Minecraft resource packs.
+processResources {
+    from('../../assets/NamLauncher-icon.png') { into 'namlauncher-internal'; rename { 'badge.png' } }
+}

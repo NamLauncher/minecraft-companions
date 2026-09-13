@@ -1,0 +1,3 @@
+// Author/creator: nattapat2871 (https://nattapat2871.me)
+pluginManagement { repositories { gradlePluginPortal(); maven { url = 'https://maven.neoforged.net/releases' } } }
+rootProject.name = 'namlauncher-game-companion-neoforge-1.21.1'

@@ -1,0 +1,24 @@
+{
+  "_author": "nattapat2871 (https://nattapat2871.me)",
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.namlauncher.bridge.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "plugin": "com.namlauncher.bridge.mixin.BrandingMixinPlugin",
+  "client": [
+    "BadgeResourceManagerMixin",
+    "ClientPacketListenerMixin",
+    "MinecraftWindowTitleMixin",
+    "DebugEntryVersionMixin",
+    "DebugEntryFpsMixin",
+    "ChatListenerMixin",
+    "ChatComponentBadgeMixin",
+    "PlayerTabOverlayMixin",
+    "AvatarRendererMixin",
+    "ServerNameTagMixin",
+    "TextDisplayBadgeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

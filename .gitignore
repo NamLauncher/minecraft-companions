@@ -1,0 +1,15 @@
+# Author/creator: nattapat2871 (https://nattapat2871.me)
+
+node_modules/
+dist/
+**/.gradle/
+**/build/
+**/logs/
+*.log
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

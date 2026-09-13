@@ -1,0 +1,49 @@
+// Author/creator: nattapat2871 (https://nattapat2871.me)
+plugins { id 'java-library'; id 'net.neoforged.moddev' version '2.0.144' }
+version = '1.2.4-beta3+1.21.11'
+group = 'com.namlauncher'
+base { archivesName = 'namlauncher-game-companion-neoforge-1.21.11' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = '21.11.45'
+    mods { namlauncher_game_companion { sourceSet sourceSets.main } }
+}
+
+tasks.named('compileJava') {
+    source fileTree('../fabric-1.21.11/src/main/java')
+    source fileTree('../../game-bridge/src/main/java') {
+        exclude '**/BrandingConstants.java'
+        exclude '**/BrandingFormatter.java'
+    }
+    source fileTree('../../game-bridge/src/client/java') {
+        exclude '**/badge/BadgeComponents.java'
+        exclude '**/badge/NamLauncherChatOutput.java'
+        exclude '**/badge/PlayerBadgeLookupService.java'
+        exclude '**/mixin/ChatListenerMixin.java'
+        exclude '**/mixin/ChatComponentBadgeMixin.java'
+        exclude '**/mixin/DebugEntryVersionMixin.java'
+        exclude '**/NamLauncherBrandingClient.java'
+        exclude '**/RuntimeVersionGate.java'
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand(version: project.version) }
+    from('../../assets/NamLauncher-icon.png') { into 'assets/namlauncher/textures/font'; rename { 'badge.png' } }
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 21 }
+tasks.named('test') { useJUnitPlatform() }
+tasks.withType(AbstractArchiveTask).configureEach { preserveFileTimestamps = false; reproducibleFileOrder = true }
+
+// Private icon entry is not addressable through Minecraft resource packs.
+processResources {
+    from('../../assets/NamLauncher-icon.png') { into 'namlauncher-internal'; rename { 'badge.png' } }
+}

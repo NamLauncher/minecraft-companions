@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "namlauncher-branding-bridge",
+  "version": "${version}",
+  "name": "NamLauncher Branding Bridge",
+  "description": "Managed client bridge for NamLauncher window-title and F3 branding on Minecraft 26.2.",
+  "icon": "assets/namlauncher/textures/font/badge.png",
+  "authors": [
+    {
+      "name": "nattapat2871",
+      "contact": {
+        "homepage": "https://nattapat2871.me"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://namlauncher.nattapat2871.me",
+    "sources": "https://github.com/Nattapat2871/NamLauncher"
+  },
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.namlauncher.bridge.NamLauncherBrandingClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "namlauncher-branding-bridge.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=25"
+  },
+  "custom": {
+    "namlauncher:managed_bridge": {
+      "launcher_version": "1.2.4-beta3",
+      "target_minecraft": "${minecraft_version}",
+      "required_fabric_loader": "${loader_version}",
+      "managed": true
+    }
+  }
+}

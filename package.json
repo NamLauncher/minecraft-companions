@@ -1,0 +1,19 @@
+{
+  "name": "@namlauncher/minecraft-companions",
+  "version": "1.2.4-beta3",
+  "private": true,
+  "description": "Private Minecraft companion sources and verified launcher bundle exporter for NamLauncher",
+  "author": "nattapat2871 (https://nattapat2871.me)",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build:bundle": "node scripts/export-launcher-bundle.mjs",
+    "build:bundle:clean": "node scripts/export-launcher-bundle.mjs --clean-after-stage"
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.1"
+  }
+}

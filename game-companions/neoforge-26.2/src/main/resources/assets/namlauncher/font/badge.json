@@ -1,0 +1,12 @@
+{
+  "_author": "nattapat2871 (https://nattapat2871.me)",
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "namlauncher:font/badge.png",
+      "ascent": 8,
+      "height": 8,
+      "chars": ["\ue001"]
+    }
+  ]
+}

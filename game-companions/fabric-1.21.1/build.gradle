@@ -1,0 +1,52 @@
+// Author/creator: nattapat2871 (https://nattapat2871.me)
+plugins { id 'fabric-loom' version '1.10.5' }
+
+version = '1.1.16+1.21.1'
+group = 'com.namlauncher'
+base { archivesName = 'namlauncher-game-companion-fabric-1.21.1' }
+
+tasks.named('compileJava') {
+    source fileTree('../fabric-1.20.1/src/main/java') {
+        exclude '**/mixin/PlayerRendererMixin.java'
+        exclude '**/BadgeComponents.java'
+        exclude '**/BadgeResourcePack.java'
+    }
+}
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.1'
+    mappings loom.officialMojangMappings()
+    modImplementation 'net.fabricmc:fabric-loader:0.19.3'
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') { expand(version: project.version) }
+    from('../../assets/NamLauncher-icon.png') {
+        into 'assets/namlauncher/textures/font'
+        rename { 'badge.png' }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+java { withSourcesJar() }
+tasks.named('test') { useJUnitPlatform() }
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+// Private icon entry is not addressable through Minecraft resource packs.
+processResources {
+    from('../../assets/NamLauncher-icon.png') { into 'namlauncher-internal'; rename { 'badge.png' } }
+}
+
+tasks.named('compileJava') {
+    source fileTree('../../game-bridge/src/main/java') { include '**/resources/BundledBadgeAssets.java' }
+}

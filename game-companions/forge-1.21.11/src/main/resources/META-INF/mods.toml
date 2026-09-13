@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[61,)"
+license="All Rights Reserved"
+clientSideOnly=true
+
+[[mods]]
+modId="namlauncher_game_companion"
+version="${version}"
+displayName="NamLauncher Game Companion"
+displayURL="https://namlauncher.nattapat2871.me"
+logoFile="assets/namlauncher/textures/font/badge.png"
+authors="nattapat2871 (https://nattapat2871.me)"
+description='''Launcher-managed client badge and branding companion for Forge 1.21.11.'''
+
+[[dependencies.namlauncher_game_companion]]
+modId="forge"
+mandatory=true
+versionRange="[61,)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.namlauncher_game_companion]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.21.11]"
+ordering="NONE"
+side="CLIENT"

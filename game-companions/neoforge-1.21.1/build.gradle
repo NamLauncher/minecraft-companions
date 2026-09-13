@@ -1,0 +1,64 @@
+// Author/creator: nattapat2871 (https://nattapat2871.me)
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.144'
+}
+
+version = '1.1.16+1.21.1'
+group = 'com.namlauncher'
+base { archivesName = 'namlauncher-game-companion-neoforge-1.21.1' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = '21.1.248'
+    mods {
+        namlauncher_game_companion { sourceSet sourceSets.main }
+    }
+}
+
+tasks.named('compileJava') {
+    source fileTree('../fabric-1.20.1/src/main/java') {
+        exclude '**/mixin/PlayerRendererMixin.java'
+        exclude '**/BadgeComponents.java'
+        exclude '**/BadgeResourcePack.java'
+        exclude '**/BrandingFormatter.java'
+        exclude '**/PlayerBadgeLookupService.java'
+        exclude '**/NamLauncherCompanionClient.java'
+    }
+    source fileTree('../fabric-1.21.1/src/main/java')
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand(version: project.version) }
+    from('../../assets/NamLauncher-icon.png') {
+        into 'assets/namlauncher/textures/font'
+        rename { 'badge.png' }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 21 }
+tasks.named('test') { useJUnitPlatform() }
+tasks.withType(AbstractArchiveTask).configureEach { preserveFileTimestamps = false; reproducibleFileOrder = true }
+tasks.named('jar', Jar) {
+    manifest.attributes(
+        'Implementation-Title': 'NamLauncher Game Companion',
+        'Implementation-Version': project.version,
+        'Implementation-Vendor': 'nattapat2871 (https://nattapat2871.me)'
+    )
+}
+
+// Private icon entry is not addressable through Minecraft resource packs.
+processResources {
+    from('../../assets/NamLauncher-icon.png') { into 'namlauncher-internal'; rename { 'badge.png' } }
+}
+
+tasks.named('compileJava') {
+    source fileTree('../../game-bridge/src/main/java') { include '**/resources/BundledBadgeAssets.java' }
+}

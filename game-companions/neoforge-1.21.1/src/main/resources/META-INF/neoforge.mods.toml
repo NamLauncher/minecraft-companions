@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="namlauncher_game_companion"
+version="${version}"
+displayName="NamLauncher Game Companion"
+displayURL="https://namlauncher.nattapat2871.me"
+logoFile="assets/namlauncher/textures/font/badge.png"
+authors="nattapat2871 (https://nattapat2871.me)"
+description='''Launcher-managed client badge and branding companion for NeoForge 1.21.1.'''
+
+[[mixins]]
+config="namlauncher-game-companion.neoforge-1.21.1.mixins.json"
+
+[[dependencies.namlauncher_game_companion]]
+modId="neoforge"
+type="required"
+versionRange="[21.1,)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.namlauncher_game_companion]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="CLIENT"

@@ -1,0 +1,45 @@
+// Author/creator: nattapat2871 (https://nattapat2871.me)
+plugins { id 'java'; id 'net.minecraftforge.gradle' version '7.0.35' }
+version = '1.2.4-beta3+1.21.11'
+group = 'com.namlauncher'
+base { archivesName = 'namlauncher-game-companion-forge-1.21.11' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+minecraft { mappings channel: 'official', version: '1.21.11' }
+repositories { minecraft.mavenizer(it); maven fg.forgeMaven; maven fg.minecraftLibsMaven; mavenCentral() }
+dependencies { implementation minecraft.dependency('net.minecraftforge:forge:1.21.11-61.2.1') }
+
+tasks.named('compileJava') {
+    source fileTree('../fabric-1.21.11/src/main/java')
+    source fileTree('../../game-bridge/src/main/java') {
+        exclude '**/BrandingConstants.java'
+        exclude '**/BrandingFormatter.java'
+    }
+    source fileTree('../../game-bridge/src/client/java') {
+        exclude '**/badge/BadgeComponents.java'
+        exclude '**/badge/NamLauncherChatOutput.java'
+        exclude '**/badge/PlayerBadgeLookupService.java'
+        exclude '**/mixin/ChatListenerMixin.java'
+        exclude '**/mixin/ChatComponentBadgeMixin.java'
+        exclude '**/mixin/DebugEntryVersionMixin.java'
+        exclude '**/NamLauncherBrandingClient.java'
+        exclude '**/RuntimeVersionGate.java'
+    }
+    source fileTree('../neoforge-1.21.11/src/main/java') {
+        include '**/badge/PlayerBadgeLookupService.java'
+    }
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') { expand(version: project.version) }
+    from('../../assets/NamLauncher-icon.png') { into 'assets/namlauncher/textures/font'; rename { 'badge.png' } }
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 21 }
+tasks.withType(AbstractArchiveTask).configureEach { preserveFileTimestamps = false; reproducibleFileOrder = true }
+tasks.named('jar', Jar) { manifest.attributes('MixinConfigs': 'namlauncher-game-companion.forge-1.21.11.mixins.json') }
+
+// Private icon entry is not addressable through Minecraft resource packs.
+processResources {
+    from('../../assets/NamLauncher-icon.png') { into 'namlauncher-internal'; rename { 'badge.png' } }
+}

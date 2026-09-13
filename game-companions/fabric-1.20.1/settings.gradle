@@ -1,0 +1,13 @@
+// Author/creator: nattapat2871 (https://nattapat2871.me)
+
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'namlauncher-game-companion-fabric-1.20.1'

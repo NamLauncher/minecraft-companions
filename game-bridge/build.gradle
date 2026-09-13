@@ -1,0 +1,147 @@
+// Author/creator: nattapat2871 (https://nattapat2871.me)
+
+import net.fabricmc.loom.util.ZipReprocessorUtil
+import net.fabricmc.loom.util.ZipUtils
+
+import java.util.jar.Attributes
+import java.util.jar.Manifest
+
+plugins {
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+def bridgeVersion = project.version.toString()
+def minecraftVersion = project.minecraft_version.toString()
+def fabricLoaderVersion = project.loader_version.toString()
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    // Loom supplies the official Mojang, Fabric, and Maven Central repositories.
+}
+
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        'namlauncher-branding-bridge' {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+processResources {
+    inputs.property 'version', bridgeVersion
+    inputs.property 'minecraft_version', minecraftVersion
+    inputs.property 'loader_version', fabricLoaderVersion
+
+    filesMatching('fabric.mod.json') {
+        expand(
+            version: bridgeVersion,
+            minecraft_version: minecraftVersion,
+            loader_version: fabricLoaderVersion
+        )
+    }
+    from('../assets/NamLauncher-icon.png') {
+        into 'assets/namlauncher/textures/font'
+        rename { 'badge.png' }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 25
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+    withSourcesJar()
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'NamLauncher Branding Bridge',
+            'Implementation-Version': bridgeVersion,
+            'Implementation-Vendor': 'nattapat2871 (https://nattapat2871.me)',
+            'NamLauncher-Target-Minecraft': minecraftVersion,
+            'NamLauncher-Required-Fabric-Loader': fabricLoaderVersion
+        )
+    }
+}
+
+tasks.register('canonicalizeBridgeJar') {
+    dependsOn tasks.named('build')
+
+    doLast {
+        def jarPath = tasks.named('jar').get().archiveFile.get().asFile.toPath()
+        def clientOnlyAttribute = new Attributes.Name('Fabric-Loom-Client-Only-Entries')
+
+        ZipReprocessorUtil.transformZipEntry(
+            jarPath,
+            'META-INF/MANIFEST.MF',
+            { byte[] originalBytes ->
+                def manifest = new Manifest(new ByteArrayInputStream(originalBytes))
+                def rawEntries = manifest.mainAttributes.getValue(clientOnlyAttribute)
+                if (!rawEntries) {
+                    throw new GradleException('Loom client-only manifest entries are missing.')
+                }
+
+                def sortedEntries = rawEntries
+                    .split(';')
+                    .findAll { !it.isBlank() }
+                    .sort()
+                    .join(';')
+                manifest.mainAttributes.putValue(clientOnlyAttribute.toString(), sortedEntries)
+
+                def output = new ByteArrayOutputStream()
+                manifest.write(output)
+                output.toByteArray()
+            } as ZipUtils.UnsafeUnaryOperator
+        )
+    }
+}
+
+publishing {
+    publications {
+        create('mavenJava', MavenPublication) {
+            artifactId = project.archives_base_name
+            from components.java
+        }
+    }
+}
+
+// Private icon entry is not addressable through Minecraft resource packs.
+processResources {
+    from('../assets/NamLauncher-icon.png') { into 'namlauncher-internal'; rename { 'badge.png' } }
+}

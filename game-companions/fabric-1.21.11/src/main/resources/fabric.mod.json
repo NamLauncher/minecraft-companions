@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "namlauncher-game-companion",
+  "version": "${version}",
+  "name": "NamLauncher Game Companion",
+  "description": "Launcher-managed client badge and branding companion for Fabric 1.21.11.",
+  "icon": "assets/namlauncher/textures/font/badge.png",
+  "authors": ["nattapat2871 (https://nattapat2871.me)"],
+  "contact": {
+    "homepage": "https://namlauncher.nattapat2871.me",
+    "sources": "https://github.com/Nattapat2871/NamLauncher"
+  },
+  "environment": "client",
+  "entrypoints": { "client": ["com.namlauncher.bridge.NamLauncherBrandingClient"] },
+  "mixins": ["namlauncher-game-companion.fabric-1.21.11.mixins.json"],
+  "depends": { "fabricloader": ">=0.19.0", "minecraft": "=1.21.11", "java": ">=21" }
+}
