@@ -13,9 +13,11 @@
       }
     }
   ],
+  "license": "GPL-3.0-only",
   "contact": {
     "homepage": "https://namlauncher.nattapat2871.me",
-    "sources": "https://github.com/Nattapat2871/NamLauncher"
+    "sources": "https://github.com/NamLauncher/minecraft-companions",
+    "issues": "https://github.com/NamLauncher/minecraft-companions/issues"
   },
   "environment": "client",
   "entrypoints": {

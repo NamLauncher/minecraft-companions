@@ -2,7 +2,8 @@
   "name": "@namlauncher/minecraft-companions",
   "version": "1.2.4",
   "private": true,
-  "description": "Private Minecraft companion sources and verified launcher bundle exporter for NamLauncher",
+  "description": "Open-source Minecraft companion mods and verified launcher bundle exporter for NamLauncher",
+  "license": "GPL-3.0-only",
   "author": "nattapat2871 (https://nattapat2871.me)",
   "type": "module",
   "engines": {

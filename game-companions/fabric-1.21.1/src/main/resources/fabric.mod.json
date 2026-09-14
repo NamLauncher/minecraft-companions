@@ -6,6 +6,12 @@
   "description": "Launcher-managed client badge and branding companion for Fabric 1.21.1.",
   "icon": "assets/namlauncher/textures/font/badge.png",
   "authors": ["nattapat2871 (https://nattapat2871.me)"],
+  "license": "GPL-3.0-only",
+  "contact": {
+    "homepage": "https://namlauncher.nattapat2871.me",
+    "sources": "https://github.com/NamLauncher/minecraft-companions",
+    "issues": "https://github.com/NamLauncher/minecraft-companions/issues"
+  },
   "environment": "client",
   "entrypoints": {
     "client": ["com.namlauncher.bridge.fabric1201.NamLauncherCompanionClient"]

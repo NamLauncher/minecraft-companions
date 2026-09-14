@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[61,)"
-license="All Rights Reserved"
+license="GPL-3.0-only"
 clientSideOnly=true
 
 [[mods]]

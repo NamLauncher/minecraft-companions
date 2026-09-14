@@ -26,7 +26,7 @@ test('keeps the canonical Fabric bridge compatible with newer loader releases', 
   assert.match(metadata, /"fabricloader":\s*">=\$\{loader_version\}"/)
 })
 
-test('exports from the private repository into an explicit launcher destination', async () => {
+test('exports from the source repository into an explicit launcher destination', async () => {
   const [buildSource, exporterSource] = await Promise.all([
     read('game-bridge/build.gradle'),
     read('scripts/export-launcher-bundle.mjs')
