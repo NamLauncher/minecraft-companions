@@ -163,7 +163,7 @@ public final class PlayerBadgeLookupService {
                 .timeout(Duration.ofSeconds(config.requestTimeoutSeconds()))
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
-                .header("User-Agent", "NamLauncher-Game-Bridge/1.2.4-beta3")
+                .header("User-Agent", "NamLauncher-Game-Bridge/1.2.4")
                 .POST(HttpRequest.BodyPublishers.ofString(body.toString(), StandardCharsets.UTF_8))
                 .build();
             HttpResponse<InputStream> response = httpClient.send(

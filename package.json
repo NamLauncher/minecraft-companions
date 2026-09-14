@@ -1,6 +1,6 @@
 {
   "name": "@namlauncher/minecraft-companions",
-  "version": "1.2.4-beta3",
+  "version": "1.2.4",
   "private": true,
   "description": "Private Minecraft companion sources and verified launcher bundle exporter for NamLauncher",
   "author": "nattapat2871 (https://nattapat2871.me)",

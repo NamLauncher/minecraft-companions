@@ -1,6 +1,6 @@
 // Author/creator: nattapat2871 (https://nattapat2871.me)
 plugins { id 'java-library'; id 'net.neoforged.moddev' version '2.0.144' }
-version = '1.2.4-beta3+26.2'
+version = '1.2.4+26.2'
 group = 'com.namlauncher'
 base { archivesName = 'namlauncher-game-companion-neoforge-26.2' }
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)

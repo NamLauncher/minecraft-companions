@@ -32,7 +32,7 @@ const STAGE_DIR = path.resolve(
 )
 const LEGACY_DIR = path.join(WORKSPACE_ROOT, 'prebuilt', 'legacy')
 const AUTHOR = 'nattapat2871 (https://nattapat2871.me)'
-const LAUNCHER_VERSION = '1.2.4-beta3'
+const LAUNCHER_VERSION = '1.2.4'
 const MAX_ARTIFACT_BYTES = 16 * 1024 * 1024
 const MOD_ICON_ENTRY = 'assets/namlauncher/textures/font/badge.png'
 const MOD_ICON_SOURCE = path.join(WORKSPACE_ROOT, 'assets', 'NamLauncher-icon.png')
@@ -66,29 +66,29 @@ const retainedArtifacts = [
 
 const projects = [
   {
-    loader: 'fabric', minecraftVersion: '1.21.11', version: '1.2.4-beta3+1.21.11', runtime: 25, gradle: 9,
-    project: 'game-companions/fabric-1.21.11', filename: 'namlauncher-game-companion-fabric-1.21.11-1.2.4-beta3+1.21.11.jar'
+    loader: 'fabric', minecraftVersion: '1.21.11', version: '1.2.4+1.21.11', runtime: 25, gradle: 9,
+    project: 'game-companions/fabric-1.21.11', filename: 'namlauncher-game-companion-fabric-1.21.11-1.2.4+1.21.11.jar'
   },
   {
-    loader: 'forge', minecraftVersion: '1.21.11', version: '1.2.4-beta3+1.21.11', runtime: 21, gradle: 9,
-    project: 'game-companions/forge-1.21.11', filename: 'namlauncher-game-companion-forge-1.21.11-1.2.4-beta3+1.21.11.jar'
+    loader: 'forge', minecraftVersion: '1.21.11', version: '1.2.4+1.21.11', runtime: 21, gradle: 9,
+    project: 'game-companions/forge-1.21.11', filename: 'namlauncher-game-companion-forge-1.21.11-1.2.4+1.21.11.jar'
   },
   {
-    loader: 'neoforge', minecraftVersion: '1.21.11', version: '1.2.4-beta3+1.21.11', runtime: 21, gradle: 8,
-    project: 'game-companions/neoforge-1.21.11', filename: 'namlauncher-game-companion-neoforge-1.21.11-1.2.4-beta3+1.21.11.jar'
+    loader: 'neoforge', minecraftVersion: '1.21.11', version: '1.2.4+1.21.11', runtime: 21, gradle: 8,
+    project: 'game-companions/neoforge-1.21.11', filename: 'namlauncher-game-companion-neoforge-1.21.11-1.2.4+1.21.11.jar'
   },
   {
-    loader: 'fabric', minecraftVersion: '26.2', version: '1.2.4-beta3+26.2', runtime: 25, gradle: 9,
-    project: 'game-bridge', filename: 'namlauncher-branding-bridge-1.2.4-beta3+26.2.jar', task: 'canonicalizeBridgeJar',
+    loader: 'fabric', minecraftVersion: '26.2', version: '1.2.4+26.2', runtime: 25, gradle: 9,
+    project: 'game-bridge', filename: 'namlauncher-branding-bridge-1.2.4+26.2.jar', task: 'canonicalizeBridgeJar',
     minimumLoaderVersion: '0.19.3'
   },
   {
-    loader: 'forge', minecraftVersion: '26.2', version: '1.2.4-beta3+26.2', runtime: 25, gradle: 9,
-    project: 'game-companions/forge-26.2', filename: 'namlauncher-game-companion-forge-26.2-1.2.4-beta3+26.2.jar'
+    loader: 'forge', minecraftVersion: '26.2', version: '1.2.4+26.2', runtime: 25, gradle: 9,
+    project: 'game-companions/forge-26.2', filename: 'namlauncher-game-companion-forge-26.2-1.2.4+26.2.jar'
   },
   {
-    loader: 'neoforge', minecraftVersion: '26.2', version: '1.2.4-beta3+26.2', runtime: 25, gradle: 9,
-    project: 'game-companions/neoforge-26.2', filename: 'namlauncher-game-companion-neoforge-26.2-1.2.4-beta3+26.2.jar'
+    loader: 'neoforge', minecraftVersion: '26.2', version: '1.2.4+26.2', runtime: 25, gradle: 9,
+    project: 'game-companions/neoforge-26.2', filename: 'namlauncher-game-companion-neoforge-26.2-1.2.4+26.2.jar'
   }
 ]
 

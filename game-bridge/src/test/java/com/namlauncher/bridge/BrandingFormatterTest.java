@@ -13,7 +13,7 @@ final class BrandingFormatterTest {
     @Test
     void formatsSingleplayerWindowTitle() {
         assertEquals(
-            "NamLauncher v.1.2.4-beta3 (26.2) - Singleplayer",
+            "NamLauncher v.1.2.4 (26.2) - Singleplayer",
             BrandingFormatter.formatWindowTitle("Minecraft 26.2 - Singleplayer")
         );
     }
@@ -21,7 +21,7 @@ final class BrandingFormatterTest {
     @Test
     void formatsThirdPartyServerWindowTitle() {
         assertEquals(
-            "NamLauncher v.1.2.4-beta3 (26.2) - Multiplayer (3rd-party Server)",
+            "NamLauncher v.1.2.4 (26.2) - Multiplayer (3rd-party Server)",
             BrandingFormatter.formatWindowTitle("Minecraft* 26.2 - Multiplayer (3rd-party Server)")
         );
     }
@@ -36,7 +36,7 @@ final class BrandingFormatterTest {
     @Test
     void preservesF3DiagnosticSuffix() {
         assertEquals(
-            "NamLauncher v.1.2.4-beta3 (26.2) (26.2/fabric)",
+            "NamLauncher v.1.2.4 (26.2) (26.2/fabric)",
             BrandingFormatter.formatF3Header("Minecraft 26.2 (26.2/fabric)")
         );
     }
@@ -67,7 +67,7 @@ final class BrandingFormatterTest {
         List<String> branded = BrandingFormatter.formatF3Lines(original);
 
         assertNotSame(original, branded);
-        assertEquals("NamLauncher v.1.2.4-beta3 (26.2) (26.2/fabric)", branded.getFirst());
+        assertEquals("NamLauncher v.1.2.4 (26.2) (26.2/fabric)", branded.getFirst());
         assertEquals(original.subList(1, original.size()), branded.subList(1, branded.size()));
     }
 
