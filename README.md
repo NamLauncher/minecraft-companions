@@ -1,13 +1,24 @@
 # NamLauncher Minecraft Companions
 
-Private source repository for the Minecraft-side components bundled with
-NamLauncher. It owns the Fabric, Forge, and NeoForge implementations, their
-compatibility tests, the protected badge assets, and the reproducible launcher
-bundle exporter.
+Open-source Minecraft client companions bundled and managed by NamLauncher.
+This repository contains the Fabric, Forge, and NeoForge implementations,
+compatibility tests, badge assets, and the reproducible launcher bundle
+exporter.
 
-This repository must remain private. The public launcher repository contains
-only the verified JAR bundle and its SHA-256 manifest; it does not contain these
-Java sources or build tooling.
+The companion adds NamLauncher branding and an optional verified-player badge
+to supported Minecraft clients. It is client-only: no server installation is
+required, and it does not grant gameplay permissions or bypass server rules.
+
+## Features
+
+- Displays the NamLauncher badge before a verified player's name in chat, the
+  player list, and supported name tags, with consistent spacing.
+- Provides `/namlauncher` client preferences for supported badge surfaces.
+- Keeps badge assets isolated from normal resource-pack overrides.
+- Adds bounded NamLauncher branding to the window title and supported F3
+  entries.
+- Supports launcher-managed integrity verification and restoration before the
+  game starts.
 
 ## Supported maintained matrix
 
@@ -49,12 +60,23 @@ toolchains are not in their documented local locations.
 
 ## Repository boundary
 
-- This repo owns Minecraft mod source and the bundle exporter.
+- This public repo owns the Minecraft companion source and bundle exporter.
 - `NamLauncher/NamLauncher` owns the Electron launcher and a verified bundle.
 - `NamLauncher/platform` owns the API, website, Discord integration, and data
   schemas.
 - `NamLauncher/operations` owns deployment templates and runbooks.
 - Never commit tokens, signing keys, `.env` files, player data, production
   databases, logs, or `.qa` workspaces.
+
+## Contributing and security
+
+Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md)
+before submitting a change. Report security vulnerabilities using the private
+process described in [SECURITY.md](SECURITY.md), never in a public issue.
+
+## License
+
+Copyright (c) 2026 nattapat2871. This project is licensed under
+[GPL-3.0-only](LICENSE). Third-party components retain their own licenses.
 
 Author/creator: [nattapat2871](https://nattapat2871.me)

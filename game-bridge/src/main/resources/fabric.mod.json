@@ -13,9 +13,11 @@
       }
     }
   ],
+  "license": "GPL-3.0-only",
   "contact": {
     "homepage": "https://namlauncher.nattapat2871.me",
-    "sources": "https://github.com/Nattapat2871/NamLauncher"
+    "sources": "https://github.com/NamLauncher/minecraft-companions",
+    "issues": "https://github.com/NamLauncher/minecraft-companions/issues"
   },
   "environment": "client",
   "entrypoints": {
@@ -36,7 +38,7 @@
   },
   "custom": {
     "namlauncher:managed_bridge": {
-      "launcher_version": "1.2.4-beta3",
+      "launcher_version": "1.2.4",
       "target_minecraft": "${minecraft_version}",
       "required_fabric_loader": "${loader_version}",
       "managed": true

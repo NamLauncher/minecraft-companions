@@ -1,7 +1,7 @@
 // Author/creator: nattapat2871 (https://nattapat2871.me)
 plugins { id 'fabric-loom' version '1.16.3' }
 
-version = '1.2.4-beta3+1.21.11'
+version = '1.2.4+1.21.11'
 group = 'com.namlauncher'
 base { archivesName = 'namlauncher-game-companion-fabric-1.21.11' }
 

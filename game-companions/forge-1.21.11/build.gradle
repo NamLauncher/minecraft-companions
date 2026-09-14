@@ -1,6 +1,6 @@
 // Author/creator: nattapat2871 (https://nattapat2871.me)
 plugins { id 'java'; id 'net.minecraftforge.gradle' version '7.0.35' }
-version = '1.2.4-beta3+1.21.11'
+version = '1.2.4+1.21.11'
 group = 'com.namlauncher'
 base { archivesName = 'namlauncher-game-companion-forge-1.21.11' }
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
